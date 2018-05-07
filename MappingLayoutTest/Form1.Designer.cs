@@ -29,19 +29,21 @@
         private void InitializeComponent()
         {
             this.MapGridView = new System.Windows.Forms.DataGridView();
-            this.DirectoryLabel = new System.Windows.Forms.Label();
-            this.BrowseButton = new System.Windows.Forms.Button();
-            this.DirectoryTextbox = new System.Windows.Forms.TextBox();
             this.order = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FYIField = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.MapLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.map = new System.Windows.Forms.DataGridViewLinkColumn();
             this.IsMapped = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DirectoryLabel = new System.Windows.Forms.Label();
+            this.BrowseButton = new System.Windows.Forms.Button();
+            this.DirectoryTextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.MapGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // MapGridView
             // 
+            this.MapGridView.AllowUserToAddRows = false;
+            this.MapGridView.AllowUserToDeleteRows = false;
             this.MapGridView.AllowUserToResizeRows = false;
             this.MapGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -62,37 +64,8 @@
             this.MapGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.MapGridView.Size = new System.Drawing.Size(677, 393);
             this.MapGridView.TabIndex = 0;
-            this.MapGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MapGridView_CellContentClick_1);
-            this.MapGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.MapGridView_CellContentClick);
-            // 
-            // DirectoryLabel
-            // 
-            this.DirectoryLabel.AutoSize = true;
-            this.DirectoryLabel.Location = new System.Drawing.Point(17, 15);
-            this.DirectoryLabel.Name = "DirectoryLabel";
-            this.DirectoryLabel.Size = new System.Drawing.Size(92, 13);
-            this.DirectoryLabel.TabIndex = 5;
-            this.DirectoryLabel.Text = "Current Directory: ";
-            // 
-            // BrowseButton
-            // 
-            this.BrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BrowseButton.Location = new System.Drawing.Point(614, 10);
-            this.BrowseButton.Name = "BrowseButton";
-            this.BrowseButton.Size = new System.Drawing.Size(75, 23);
-            this.BrowseButton.TabIndex = 4;
-            this.BrowseButton.Text = "Browse...";
-            this.BrowseButton.UseVisualStyleBackColor = true;
-            this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
-            // 
-            // DirectoryTextbox
-            // 
-            this.DirectoryTextbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DirectoryTextbox.Location = new System.Drawing.Point(115, 12);
-            this.DirectoryTextbox.Name = "DirectoryTextbox";
-            this.DirectoryTextbox.Size = new System.Drawing.Size(493, 20);
-            this.DirectoryTextbox.TabIndex = 3;
+            this.MapGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MapGridView_CellContentClick);
+            this.MapGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.MapGridView_CellValueChanged);
             // 
             // order
             // 
@@ -129,6 +102,35 @@
             this.IsMapped.HeaderText = "Mapped?";
             this.IsMapped.Name = "IsMapped";
             this.IsMapped.ReadOnly = true;
+            // 
+            // DirectoryLabel
+            // 
+            this.DirectoryLabel.AutoSize = true;
+            this.DirectoryLabel.Location = new System.Drawing.Point(17, 15);
+            this.DirectoryLabel.Name = "DirectoryLabel";
+            this.DirectoryLabel.Size = new System.Drawing.Size(92, 13);
+            this.DirectoryLabel.TabIndex = 5;
+            this.DirectoryLabel.Text = "Current Directory: ";
+            // 
+            // BrowseButton
+            // 
+            this.BrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BrowseButton.Location = new System.Drawing.Point(614, 10);
+            this.BrowseButton.Name = "BrowseButton";
+            this.BrowseButton.Size = new System.Drawing.Size(75, 23);
+            this.BrowseButton.TabIndex = 4;
+            this.BrowseButton.Text = "Browse...";
+            this.BrowseButton.UseVisualStyleBackColor = true;
+            this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
+            // 
+            // DirectoryTextbox
+            // 
+            this.DirectoryTextbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DirectoryTextbox.Location = new System.Drawing.Point(115, 12);
+            this.DirectoryTextbox.Name = "DirectoryTextbox";
+            this.DirectoryTextbox.Size = new System.Drawing.Size(493, 20);
+            this.DirectoryTextbox.TabIndex = 3;
             // 
             // MainForm
             // 

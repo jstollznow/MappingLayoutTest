@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MappingLayoutTest
@@ -16,7 +10,19 @@ namespace MappingLayoutTest
         {
             InitializeComponent();
         }
+        private int CheckFolderLevels(string filePath)
+        {
 
+            DirectoryInfo root = new DirectoryInfo(filePath);
+            //root.GetDirectories("*.*", SearchOption.AllDirectories);
+
+            return 0;
+        }
+
+        private void AddDefaultRow()
+        {
+            MapGridView.Rows.Add(MapGridView.Rows.Count+1, null, DirectoryTextbox.Text, "", char.ConvertFromUtf32(0x00002716));
+        }
         private void MainForm_Load(object sender, EventArgs e)
         {
             MapGridView.DefaultCellStyle.SelectionBackColor = MapGridView.DefaultCellStyle.BackColor;
@@ -30,20 +36,7 @@ namespace MappingLayoutTest
 
             ((DataGridViewComboBoxColumn)MapGridView.Columns[1]).DataSource = FYImapping.Items;
 
-            DataGridViewRow example = (DataGridViewRow)MapGridView.Rows[0].Clone();
-            example.Cells[0].Value = "1";
-            //example.Cells[1].Value = "Clients";
-            example.Cells[2].Value = "";
-            example.Cells[3].Value = "Map";
-            example.Cells[4].Value= char.ConvertFromUtf32(0x00002716);
-            MapGridView.Rows.Add(example);
-            DataGridViewRow example1 = (DataGridViewRow)MapGridView.Rows[0].Clone();
-            example1.Cells[0].Value = "2";
-            //example1.Cells[1].Value = "Cabinets";
-            example1.Cells[2].Value = "";
-            example1.Cells[3].Value = "Map";
-            example1.Cells[4].Value = char.ConvertFromUtf32(0x00002714);
-            MapGridView.Rows.Add(example1);
+            
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -59,6 +52,15 @@ namespace MappingLayoutTest
             if (SelectDirectory.ShowDialog() == DialogResult.OK)
             {
                 DirectoryTextbox.Text = SelectDirectory.SelectedPath;
+                CheckFolderLevels(SelectDirectory.SelectedPath);
+                AddDefaultRow();
+                MapGridView.Rows[0].Cells[4].Value = char.ConvertFromUtf32(0x00002716);
+
+                AddDefaultRow();
+                MapGridView.Rows[1].Cells[4].Value = char.ConvertFromUtf32(0x00002716);
+
+                AddDefaultRow();
+                MapGridView.Rows[2].Cells[4].Value = char.ConvertFromUtf32(0x00002716);
             }
         }
 
@@ -82,9 +84,20 @@ namespace MappingLayoutTest
             
         }
 
-        private void MapGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        private void MapGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-           
+            var senderGrid = (DataGridView)sender;
+            if (senderGrid.Rows.Count!=0)
+            {
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewComboBoxColumn && e.ColumnIndex == 1)
+                {
+                    if (!(senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == ""))
+                    {
+                        senderGrid.Rows[e.RowIndex].Cells[4].Value = char.ConvertFromUtf32(0x00002714);
+                    }
+                }
+            }
+            
         }
     }
 }
